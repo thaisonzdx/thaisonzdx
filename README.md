@@ -1,4 +1,10 @@
-### Hi there 👋
+<h1 align="center">Hi 👋, I'm Sơn</h1>
+
+- 🌱 I’m currently learning at VNU University of Science
+- 🤔 I’m looking for help with Linux
+- 💬 Ask me about Linux, Java or C++
+- 📫 How to reach me: [Facebook](https://www.facebook.com/vosxvo/), [Twitter](https://twitter.com/vosxvo) or [My Blog](https://vosxvo.com)
+
 
 <!--
 **vosxvo/vosxvo** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
