@@ -1,9 +1,11 @@
-<h1 align="center">Hi 👋, I'm Sơn</h1>
+# Hi 👋, I'm Son [<img width="22px" alt="Facebook" align="right" src="./assets/facebook.svg" />][facebook] [<img width="22px" alt="Twitter" align="right" src="./assets/twitter.svg" />][twitter] [<img width="22px" alt="LinkedIn" align="right" src="./assets/linkedin.svg" />][linkedin] [<img width="22px" alt="WordPress" align="right" src="./assets/rss.svg" />][rss]
 
-- 🌱 I’m currently learning at VNU University of Science
-- 🤔 I’m looking for help with Linux
-- 💬 Ask me about Linux, Java or C++
-- 📫 How to reach me: [Facebook](https://www.facebook.com/vosxvo/), [Twitter](https://twitter.com/vosxvo) or [My Blog](https://vosxvo.com)
+I'm student at VNU University of Science, major in Computers and Informations Science (Honor Program).
+
+[facebook]:https://www.facebook.com/vosxvo
+[twitter]:https://twitter.com/vosxvo
+[linkedin]:https://www.linkedin.com/in/vosxvo
+[rss]:https://vosxvo.com
 
 <!--
 **vosxvo/vosxvo** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
