@@ -10,7 +10,7 @@
 
 ### Tools : [<img width="22px" alt="WordPress" align="right" src="./assets/wordpress.svg"/>][none] [<img width="22px" alt="Ubuntu" align="right" src="./assets/ubuntu.svg"/>][none] [<img width="22px" alt="Docker" align="right" src="./assets/docker.svg"/>][none]
 
-[facebook]:https://www.facebook.com/tranthaisown
+[facebook]:https://www.facebook.com/tranthaisown#gh-dark-mode-only
 [twitter]:https://twitter.com/sonwtranthai
 [linkedin]:https://www.linkedin.com/in/sownt/
 [rss]:#
