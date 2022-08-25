@@ -10,20 +10,36 @@
 ### Workspace Setups
 <div align="center">
     <!-- Docker -->
-    <img href="./zsh/README.md" width="21px" alt="Docker" src="./assets/docker.svg#gh-light-mode-only"/>
-    <img href="./zsh/README.md" width="21px" alt="Docker" src="./assets/docker_dark.svg#gh-dark-mode-only"/>
+    <a>
+        <img width="32px" alt="Docker" src="./assets/docker.svg#gh-light-mode-only"/>
+        <img width="32px" alt="Docker" src="./assets/docker_dark.svg#gh-dark-mode-only"/>
+    </a>
+    &nbsp;&nbsp;&nbsp;
     <!-- Nginx -->
-    <img width="21px" alt="Nginx" src="./assets/nginx.svg#gh-light-mode-only"/>
-    <img width="21px" alt="Nginx" src="./assets/nginx_dark.svg#gh-dark-mode-only"/>
+    <a>
+        <img width="32px" alt="Nginx" src="./assets/nginx.svg#gh-light-mode-only"/>
+        <img width="32px" alt="Nginx" src="./assets/nginx_dark.svg#gh-dark-mode-only"/>
+    </a>
+    &nbsp;&nbsp;&nbsp;
     <!-- Ubuntu -->
-    <img width="21px" alt="Ubuntu" src="./assets/ubuntu.svg#gh-light-mode-only"/>
-    <img width="21px" alt="Ubuntu" src="./assets/ubuntu_dark.svg#gh-dark-mode-only"/>
+    <a>
+        <img width="32px" alt="Ubuntu" src="./assets/ubuntu.svg#gh-light-mode-only"/>
+        <img width="32px" alt="Ubuntu" src="./assets/ubuntu_dark.svg#gh-dark-mode-only"/>
+    </a>
+    &nbsp;&nbsp;&nbsp;
     <!-- BASH -->
-    <img width="21px" alt="BASH" src="./assets/bash.svg#gh-light-mode-only"/>
-    <img width="21px" alt="BASH" src="./assets/bash_dark.svg#gh-dark-mode-only"/>
+    <a href="./zsh/README.md#gh-light-mode-only">
+        <img width="32px" alt="BASH" src="./assets/bash.svg"/>
+    </a>
+    <a href="./zsh/README.md#gh-dark-mode-only">
+        <img width="32px" alt="BASH" src="./assets/bash_dark.svg"/>
+    </a>
+    &nbsp;&nbsp;&nbsp;
     <!-- Android Studio -->
-    <img width="21px" alt="Android Studio" src="./assets/androidstudio.svg#gh-light-mode-only"/>
-    <img width="21px" alt="Android Studio" src="./assets/androidstudio_dark.svg#gh-dark-mode-only"/>
+    <a>
+        <img width="32px" alt="Android Studio" src="./assets/androidstudio.svg#gh-light-mode-only"/>
+        <img width="32px" alt="Android Studio" src="./assets/androidstudio_dark.svg#gh-dark-mode-only"/>
+    </a>
 </div>
 
 [telegram]:https://t.me/sowntt
