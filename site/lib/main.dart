@@ -52,15 +52,26 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   double opacityLevel = 0.0;
+  double scale = 0.0;
 
   void _changeOpacity() {
-    setState(() => opacityLevel = opacityLevel == 0 ? 1.0 : 0.0);
+    setState(() => opacityLevel = opacityLevel == 0.0 ? 1.0 : 0.0);
+  }
+
+  void _changeScale() {
+    setState(() => scale = scale == 0.0 ? 1.0 : 0.0);
   }
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 500), _changeOpacity);
+    Future.delayed(
+      const Duration(milliseconds: 500),
+      () {
+        _changeOpacity();
+        _changeScale();
+      },
+    );
   }
 
   @override
@@ -82,15 +93,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildMobile(BuildContext context) {
     final media = MediaQuery.of(context).size;
     final heading = media.width ~/ 40 > 18 ? media.width ~/ 40 : 18;
-    final avatarSize = media.width ~/ 4;
+    final avatarSize = media.width ~/ 2;
     return Padding(
       padding: const EdgeInsets.all(32),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AnimatedOpacity(
-              opacity: opacityLevel,
+            AnimatedScale(
+              scale: scale,
+              curve: Curves.easeOutBack,
               duration: const Duration(seconds: 1),
               child: Image.asset(
                 'assets/avatar.png',
@@ -106,11 +118,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 textAlign: TextAlign.center,
                 text: TextSpan(
                   style: TextStyle(
-                    fontSize: heading * 1.0,
-                    height: 1.3,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w800,
-                  ),
+                      fontSize: heading * 1.0,
+                      height: 1.3,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w800,
+                      color: Colors.black),
                   children: [
                     const TextSpan(text: 'Hi, I\'m '),
                     TextSpan(
@@ -292,8 +304,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             const Spacer(),
-            AnimatedOpacity(
-              opacity: opacityLevel,
+            AnimatedScale(
+              scale: scale,
+              curve: Curves.easeOutBack,
               duration: const Duration(seconds: 1),
               child: Image.asset(
                 'assets/avatar.png',
