@@ -30,12 +30,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    name: Build and deploy profile
-    environment:
-      name: Deployment
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    name: Build Site
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -51,13 +47,22 @@ jobs:
       - name: Build for web
         run: flutter build web
         working-directory: ./site
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
           path: './site/build/web/'
+
+  deploy:
+    name: Deploy to Github Pages
+    environment:
+      name: Deployment
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
+
