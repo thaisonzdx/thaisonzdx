@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
  
 export function proxy(request: NextRequest) {
   if (request.nextUrl.pathname === '/') {
-    return NextResponse.redirect('https://github.com/sownt');
+    return NextResponse.redirect('https://github.com/thaisonzdx');
   }
   return NextResponse.next();
 }
