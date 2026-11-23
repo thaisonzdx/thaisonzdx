@@ -1,12 +1,13 @@
 {
   "name": "thaisonzdx",
-  "version": "0.1.0",
+  "version": "26.11.23",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "firebase deploy --only apphosting"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
