@@ -105,7 +105,12 @@ spacing:
   lg: 16px
   xl: 24px
   xxl: 32px
+  gutter: 24px
+  gutter-lg: 80px
+  section-y: 48px
+  section-y-lg: 64px
   section: 96px
+  frame: 1080px
 
 components:
   button-primary:
@@ -206,18 +211,69 @@ components:
     typography: "{typography.caption-md}"
     rounded: "{rounded.none}"
     padding: 16px
-  primary-nav:
+  page-frame:
+    backgroundColor: "{colors.canvas}"
+    rounded: "{rounded.none}"
+    maxWidth: "{spacing.frame}"
+  section-band:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.body}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.none}"
+    padding: 48px 24px
+  section-band-lg:
+    backgroundColor: "{colors.canvas}"
+    rounded: "{rounded.none}"
+    padding: 64px 80px
+  hero-band:
+    backgroundColor: "{colors.canvas}"
+    rounded: "{rounded.none}"
+    padding: 64px 24px
+  hero-band-lg:
+    backgroundColor: "{colors.canvas}"
+    rounded: "{rounded.none}"
+    padding: 96px 80px
+  stat-band:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.ink}"
-    typography: "{typography.body-strong}"
+    typography: "{typography.display-xl}"
     rounded: "{rounded.none}"
-    height: 56px
-  footer-section:
+    padding: 20px
+  stat-band-lg:
     backgroundColor: "{colors.canvas}"
+    rounded: "{rounded.none}"
+    padding: 32px
+  announcement-strip:
+    backgroundColor: "{colors.surface-soft}"
     textColor: "{colors.body}"
     typography: "{typography.caption-md}"
     rounded: "{rounded.none}"
+    padding: 10px 24px
+  data-table:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.body}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.none}"
+    padding: 16px 0px
+  primary-nav:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.mute}"
+    typography: "{typography.body-strong}"
+    rounded: "{rounded.none}"
+    height: 80px
+  primary-nav-active:
+    textColor: "{colors.ink}"
+  footer-section:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.body}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.none}"
     padding: 32px 0px
+  footer-legal:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.mute}"
+    typography: "{typography.caption-md}"
+    rounded: "{rounded.none}"
   link-inline:
     textColor: "{colors.ink}"
     typography: "{typography.link-md}"
@@ -232,7 +288,7 @@ components:
 
 The site is set in Comfortaa — every word of chrome, from the 38px hero headline down to the 14px footer fine print, sits in the same rounded geometric sans face. The terminal flavor comes from layout rather than type: the page reads like a manpage or a static-site README, complete with bracketed `[+]` / `[-]` / `[x]` ASCII markers used in place of icons or bullets, and a wordmark rendered as block-pixel ASCII art at the top of the nav. There is no second display face, no italics, no decorative ornament — monospace appears only inside code snippets and the TUI mockup.
 
-The chrome follows Google's product palette: white canvas (`{colors.canvas}` — `#ffffff`), Google Grey 900 ink (`{colors.ink}` — `#202124`), and the Google Grey ladder (`#3c4043` → `#5f6368` → `#80868b` → `#9aa0a6`) for body, metadata, and disabled text. Cards don't exist as raised surfaces — sections are just hairline-bordered text blocks (`{colors.hairline}` 1px) sitting directly on the canvas with `{spacing.section}` (96px) air between them. The single "visual" moment in the entire system is a full-bleed dark hero card (`{colors.surface-dark}` — true near-black) that mocks up the OpenCode TUI itself: a terminal frame with `tab` / `ctrl-p` keybinding hints, a "Build" command line, and the OpenCode wordmark rendered as a pixel-block ASCII title.
+The chrome follows Google's product palette: white canvas (`{colors.canvas}` — `#ffffff`), Google Grey 900 ink (`{colors.ink}` — `#202124`), and the Google Grey ladder (`#3c4043` → `#5f6368` → `#80868b` → `#9aa0a6`) for body, metadata, and disabled text. Cards don't exist as raised surfaces. The whole page lives inside one 1080px `{component.page-frame}` outlined by 1px `{colors.hairline}` side rules, and every section is a full-width band inside that frame, separated from the next by a single hairline and padded from within (48–64px vertical, 24–80px horizontal). The single "visual" moment in the entire system is a full-bleed dark hero card (`{colors.surface-dark}` — true near-black) that mocks up the OpenCode TUI itself: a terminal frame with `tab` / `ctrl-p` keybinding hints, a "Build" command line, and the OpenCode wordmark rendered as a pixel-block ASCII title.
 
 The semantic palette follows Google's brand ramp — `{colors.brand}` (Google Blue `#1a73e8`), `{colors.danger}` (Google Red `#d93025`), `{colors.warning}` (Google Yellow `#f9ab00`), `{colors.success}` (Google Green `#188038`) plus their hover/active deepenings. Google Blue is the primary action color (CTAs, focus rings, input focus); the other hues carry their conventional status meaning. Charts use the Google logo colors (`#4285f4`, `#ea4335`, `#fbbc04`, `#34a853`).
 
@@ -243,7 +299,7 @@ The semantic palette follows Google's brand ramp — `{colors.brand}` (Google Bl
 - 4px radius (`{rounded.sm}`) on every interactive element; sections themselves are sharp rectangles bordered in 1px hairline
 - ASCII bracket markers (`[+]`, `[-]`, `[x]`) used as bullet glyphs in feature lists and FAQ rows
 - Block-pixel ASCII wordmark in the primary nav and inside the hero TUI — the brand identity is its own ASCII art
-- 96px `{spacing.section}` rhythm between every section, with no decorative dividers; only thin 1px `{colors.hairline}` rules separate content blocks
+- A hairline-outlined 1080px page frame; sections are stacked bands inside it, each separated by one 1px `{colors.hairline}` rule and padded internally — no gaps or decorative dividers between them
 
 ## Colors
 
@@ -316,19 +372,36 @@ When substituting, line-height behavior is preserved by keeping `lineHeight: 1.5
 
 ## Layout
 
+The page is a **framed ledger**: one bordered column, cut into horizontal bands by hairlines. Nothing floats in open space between sections; the rules do the separating and the padding lives inside each band.
+
 ### Spacing System
 - **Base unit:** 8px (with finer 1/2/4px steps available for tight inline gaps).
-- **Tokens (front matter):** `{spacing.xxs}` (1px) · `{spacing.xs}` (4px) · `{spacing.sm}` (8px) · `{spacing.md}` (12px) · `{spacing.lg}` (16px) · `{spacing.xl}` (24px) · `{spacing.xxl}` (32px) · `{spacing.section}` (96px).
-- **Universal section rhythm:** every page in the set uses `{spacing.section}` (96px) as the vertical gap between major content blocks. This is the largest spacing token in the system and is the dominant layout cue across the home, `/zen`, and `/enterprise` pages.
-- **Section internal padding:** content rows inside a section sit at `{spacing.lg}` (16px) vertical with no horizontal padding — text starts flush at the section's left edge.
+- **Tokens (front matter):** `{spacing.xxs}` (1px) · `{spacing.xs}` (4px) · `{spacing.sm}` (8px) · `{spacing.md}` (12px) · `{spacing.lg}` (16px) · `{spacing.xl}` (24px) · `{spacing.xxl}` (32px) · `{spacing.gutter}` (24px) · `{spacing.gutter-lg}` (80px) · `{spacing.section-y}` (48px) · `{spacing.section-y-lg}` (64px) · `{spacing.section}` (96px) · `{spacing.frame}` (1080px).
+- **Section band padding:** `{component.section-band}` is `{spacing.section-y}` × `{spacing.gutter}` (48px / 24px) below 1024px and `{spacing.section-y-lg}` × `{spacing.gutter-lg}` (64px / 80px) from 1024px. The hero band is taller: 64px → `{spacing.section}` (96px).
+- **Inside a band:** the section label sits 16px above its content; list rows are 8px vertical, table rows 16px vertical. Text starts flush at the band's inner gutter.
 
-### Grid & Container
-- **Max width:** ~960px content column for body sections; the dark hero TUI mockup is full-bleed within an outer ~1100px content frame.
-- **Two-column split:** `/enterprise` pairs a left text block (~360px wide) with a right-aligned form column (~480px wide). The home page is single-column reading.
-- **Footer:** 5-up horizontal link row (GitHub / Docs / Changelog / Discord / X) at desktop, collapsing to 2-up at tablet and 1-up at mobile.
+### Page Frame
+- **`{component.page-frame}`** — `max-width: {spacing.frame}` (1080px), centered. From 1024px it gets 1px `{colors.hairline}` left, right and bottom rules (no top rule: the sticky nav's bottom rule closes it). Below 1024px the frame is edge-to-edge with no side rules.
+- **Inside the frame, top → bottom:** sticky `{component.primary-nav}` → optional `{component.announcement-strip}` → `main` (stacked bands) → `{component.footer-section}`.
+- **Outside the frame:** only `{component.footer-legal}` (copyright and utility links), centered 64px below the frame, with 80px of canvas below it.
+- **Every band shares the nav's horizontal gutter** (24px → 80px), so the wordmark, section labels and body text all align on one left edge.
+
+### Band Types
+- **Section band** (`{component.section-band}`) — the default. 1px `{colors.hairline}` top rule (dropped on the first band), internal padding as above, bold `{component.badge-section-label}` line then content.
+- **Hero band** (`{component.hero-band}`) — first band, taller padding. May split `1fr auto` from 768px with a type-only right column; never a photo.
+- **Full-bleed band** — breaks out of the gutter to the frame edges with a hairline top rule. Two kinds:
+  - `{component.stat-band}`: a 1 → 3 column `dl`, cells divided by hairlines (horizontal on mobile, vertical from 768px), each cell padded 20px → 32px, the value in `{typography.display-xl}` sizing (28 → 38px, `{colors.ink}`) above a `{typography.body-md}` label.
+  - `{component.hero-tui-mockup}`: the single dark band of the page. Padded with the same gutter as a section band.
+- **Split band** — a section band whose content is `1fr 480px` from 1024px (text and details left, form or action column right), stacked below.
+
+### Grid & Data
+- **Single reading column** inside each band. Prose is capped at ~65ch (`max-w-prose`).
+- **Label/description rows** (`{component.list-row}`): the bold label and the description stack on mobile and sit inline (label `shrink-0`, 8px gap) from 768px.
+- **`{component.data-table}`** — schedules and timelines: header row in `{typography.body-md}` bold `{colors.ink}` over a 1px `{colors.hairline-strong}` rule, body rows 16px vertical divided by `{colors.hairline}`, time/period column fixed-width with tabular numerals. Below 768px every row collapses into a stacked block (period as a caption, then title, then meta) and the header row is hidden.
+- **Footer:** equal link cells in one row, each separated by a 1px `{colors.hairline}` vertical rule (stacked with horizontal rules on the narrowest screens).
 
 ### Whitespace Philosophy
-Whitespace is structural and generous. Sections sit 96px apart with no decorative dividers between them — the `{colors.hairline}` 1px rule is the only signal of separation. Inside a section, content is left-flush against the column edge with no internal indentation; bullets use ASCII bracket prefixes (`[+]` / `[-]`) instead of indent-based layout. The result is a page that feels like a printed code listing rather than a styled marketing layout.
+Whitespace is structural, but it lives *inside* the bands rather than between them. A reader scans down a single bordered column where each hairline marks a new topic, like the rows of a printed ledger or a manpage. Inside a band, content is left-flush against the gutter with no extra indentation; bullets use ASCII bracket prefixes (`[+]` / `[-]` / `[x]`) instead of indent-based layout.
 
 ## Elevation & Depth
 
@@ -443,7 +516,8 @@ There is no photography. Visual elements are limited to:
 ### Navigation
 
 **`primary-nav`**
-- Background `{colors.canvas}`, text `{colors.ink}` in `{typography.body-strong}`, height ~56px, rounded `{rounded.none}`, with a 1px `{colors.hairline}` bottom rule.
+- Sticky at the top of the page frame. Background `{colors.canvas}`, height 80px, rounded `{rounded.none}`, with a 1px `{colors.hairline}` bottom rule and the same 24px → 80px horizontal gutter as the section bands.
+- Links are plain text in `{typography.body-strong}` `{colors.mute}`, turning `{colors.ink}` on hover or when active (`primary-nav-active`), 16px apart. The CTA sits 32px after the link cluster.
 - Layout (desktop): block-pixel ASCII OpenCode wordmark at left (~120×24px), nav links cluster center-right ("GitHub [150K] · Docs · Zen · Go · Enterprise"), `{component.button-primary}` "Download" CTA at the far right with a small download glyph.
 
 **Top Nav (Mobile)**
@@ -451,10 +525,12 @@ There is no photography. Visual elements are limited to:
 
 ### Footer
 
+**`announcement-strip`** — optional one-line strip directly under the nav
+- Full frame width, background `{colors.surface-soft}`, text `{colors.body}` in `{typography.caption-md}`, padding `10px 24px` (80px gutter from 1024px), centered, 1px `{colors.hairline}` bottom rule. The whole strip is a link ending in `→`; it may deepen to `{colors.surface-card}` on hover. At most one per page.
+
 **`footer-section`**
-- Background `{colors.canvas}`, text `{colors.body}` in `{typography.caption-md}`, padding `32px 0`, with a 1px `{colors.hairline}` top rule.
-- Top row: 5-column horizontal link grid (GitHub [150K] · Docs · Changelog · Discord · X), each rendered as a centered cell separated by 1px `{colors.hairline}` vertical rules.
-- Bottom row: `©2026 Anomaly` copyright at left, `Brand · Privacy · Terms · English ▼` utility cluster at right, all in `{typography.caption-md}` `{colors.mute}`.
+- The last band inside the page frame. A single row of equal link cells (GitHub · LinkedIn · Facebook · Instagram · X), each a centered `{typography.body-md}` link padded 32px vertical, separated by 1px `{colors.hairline}` vertical rules, with a 1px `{colors.hairline}` top rule. A secondary handle may follow the label in `{colors.mute}` from 640px.
+- **`footer-legal`** sits *outside* the frame, 64px below it: `©<year> <owner>` and utility links in `{typography.caption-md}` `{colors.mute}`, centered and wrapping with 32px gaps.
 
 ### Inline
 
@@ -470,13 +546,14 @@ There is no photography. Visual elements are limited to:
 - Anchor the dark `{component.hero-tui-mockup}` exactly once per landing page as the hero centerpiece. Never use the dark surface for body content.
 - Use `{colors.brand}` (Google Blue) for primary CTAs and focus states; use danger/warning/success only for status.
 - Use `{rounded.sm}` (4px) on every interactive element and `{rounded.none}` (0px) on every container.
-- Stack content sections at `{spacing.section}` (96px) rhythm with only 1px `{colors.hairline}` rules between them.
+- Put every section inside the 1080px `{component.page-frame}` as a band: 1px `{colors.hairline}` top rule, padding inside (48/24 → 64/80), and the same gutter as the nav.
 
 ### Don't
 - Don't introduce a second sans, a display face, or an italic style. Comfortaa carries everything outside code.
 - Don't add drop shadows, gradients, or atmospheric backgrounds. The system is flat-on-white.
 - Don't replace the ASCII bracket markers with SVG icons. The brackets are the icons.
 - Don't use the status colors (`{colors.warning}`, `{colors.danger}`, `{colors.success}`) on marketing CTAs. CTAs are always `{colors.brand}`.
+- Don't add margins or gaps between section bands, or nest a bordered box inside a band. The band's hairline is the only divider.
 - Don't pad cards with 24px+ internal padding. List rows sit at 8px vertical; FAQ rows at 12px.
 - Don't render the OpenCode wordmark as a vector logo. It is always block-pixel ASCII.
 - Don't fill the hero TUI mockup with photography or illustration. It is text-only and always shows a faux terminal command line.
@@ -487,22 +564,23 @@ There is no photography. Visual elements are limited to:
 
 | Name | Width | Key Changes |
 |---|---|---|
-| desktop-large | 1280px+ | Default — 960px content column, 5-up footer link grid |
-| desktop | 1024px | Same layout; nav remains horizontal |
-| tablet | 850px | Footer collapses to 2-up grid; `/enterprise` two-column form stacks |
-| tablet-narrow | 768px | Primary nav becomes hamburger drawer; Download CTA stays visible |
+| desktop-large | 1280px+ | Default — 1080px outlined page frame, 80px band gutter |
+| desktop | 1024px | Frame gets side rules; band padding 64px / 80px; split bands go `1fr 480px` |
+| tablet-narrow | 768px | Primary nav becomes hamburger drawer (CTA stays visible); tables and stat band stack; list-row labels stack |
 | mobile | 640px | Single-column everything; hero display drops 38px → ~28px; section padding tightens |
 
 ### Touch Targets
-All interactive elements meet WCAG AA at the ~36–40px height range. `{component.button-primary}` sits at ~36px with 20px horizontal padding. `{component.text-input}` and `{component.textarea}` sit at ~40px. `{component.button-tab}` rows in the install-method strip sit at ~32–36px depending on label length but extend to a full 44px tappable cell via inline padding. Footer links use `{typography.caption-md}` (14px) but receive ~28px line-height (caption-md is 2.0) plus 8px vertical padding for a comfortable ~44px tappable row.
+All interactive elements meet WCAG AA at the ~36–40px height range. `{component.button-primary}` sits at ~36px with 20px horizontal padding. `{component.text-input}` and `{component.textarea}` sit at ~40px. `{component.button-tab}` rows in the install-method strip sit at ~32–36px depending on label length but extend to a full 44px tappable cell via inline padding. Footer link cells are full-height blocks (32px vertical padding), and nav links reach 44px tall inside the 80px bar.
 
 ### Collapsing Strategy
 - **Primary nav:** desktop horizontal cluster → tablet-narrow hamburger drawer at 768px. The dark "Download" CTA stays visible at all widths.
 - **Hero TUI mockup:** maintains its full-bleed dark surface at every breakpoint; the ASCII wordmark scales proportionally and the keybinding-hint row may wrap to two lines on narrow screens.
 - **Install snippet + tab strip:** desktop fixed-width pill → mobile full-width pill with horizontal scroll on the tab strip if labels overflow.
-- **Footer:** 5-up horizontal link grid → 2-up at tablet → 1-up at mobile (each link becomes a full-width row).
-- **`/enterprise` two-column layout:** desktop 50/50 → tablet stacks to single-column with the form below the text block.
-- **Section padding:** `{spacing.section}` (96px) desktop → 64px tablet → 48px mobile.
+- **Footer:** one row of equal cells with vertical rules → stacked full-width rows with horizontal rules on the narrowest screens.
+- **Data tables:** table layout from 768px → stacked row blocks below 768px.
+- **Stat band:** 3 columns with vertical rules from 768px → stacked cells with horizontal rules below.
+- **Split bands:** `1fr 480px` from 1024px → single column with the action column below the text.
+- **Band padding:** 64px × 80px from 1024px → 48px × 24px below (hero 96px → 64px vertical). The page frame loses its side rules below 1024px.
 - **Hero headline:** `{typography.display-xl}` (38px) at desktop, scaling to ~28px at mobile, line-height holding at 1.5.
 
 ### Image Behavior
