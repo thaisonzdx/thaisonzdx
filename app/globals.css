@@ -1,26 +1,252 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-comfortaa), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-ink-deep: var(--ink-deep);
+  --color-charcoal: var(--charcoal);
+  --color-body: var(--body);
+  --color-stone: var(--stone);
+  --color-ash: var(--ash);
+  --color-surface-card: var(--surface-card);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-on-dark: var(--on-dark);
+  --color-warning: var(--warning);
+  --color-success: var(--success);
+
+  --font-sans: var(--font-comfortaa), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-heading: var(--font-sans);
+
+  /* Two-value radius system: 4px interactive, 0px containers. */
+  --radius-sm: 4px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 4px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  /* Page frame: max-w-frame. */
+  --container-frame: 1080px;
+
+  --shadow-2xs: 0 0 #0000;
+  --shadow-xs: 0 0 #0000;
+  --shadow-sm: 0 0 #0000;
+  --shadow-md: 0 0 #0000;
+  --shadow-lg: 0 0 #0000;
+  --shadow-xl: 0 0 #0000;
+  --shadow-2xl: 0 0 #0000;
+}
+
+:root {
+  --background: #ffffff; /* canvas */
+  --foreground: #202124; /* ink */
+  --card: #ffffff;
+  --card-foreground: #202124;
+  --popover: #ffffff;
+  --popover-foreground: #202124;
+  --primary: #1a73e8; /* brand */
+  --primary-foreground: #ffffff;
+  --primary-hover: #1967d2;
+  --primary-active: #185abc;
+  --secondary: #f1f3f4; /* surface-card */
+  --secondary-foreground: #202124;
+  --muted: #f8f9fa; /* surface-soft */
+  --muted-foreground: #5f6368; /* mute */
+  --accent: #f1f3f4;
+  --accent-foreground: #202124;
+  --destructive: #d93025; /* danger */
+  --border: #dadce0; /* hairline */
+  --input: #dadce0;
+  --ring: #1a73e8;
+  --chart-1: #4285f4;
+  --chart-2: #ea4335;
+  --chart-3: #fbbc04;
+  --chart-4: #34a853;
+  --chart-5: #5f6368;
+  --radius: 4px;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #202124;
+  --sidebar-primary: #1a73e8;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f3f4;
+  --sidebar-accent-foreground: #202124;
+  --sidebar-border: #dadce0;
+  --sidebar-ring: #1a73e8;
+
+  /* DESIGN.md tokens without a shadcn slot. */
+  --ink-deep: #000000;
+  --charcoal: #303134;
+  --body: #3c4043;
+  --stone: #80868b;
+  --ash: #9aa0a6;
+  --surface-card: #f1f3f4;
+  --hairline-strong: #5f6368;
+  --on-dark: #e8eaed;
+  --warning: #f9ab00;
+  --success: #188038;
+}
+
+/* surface-dark. Used only by <TuiMockup> (hero). Google dark-theme tonal pastels. */
+.dark {
+  --background: #202124;
+  --foreground: #e8eaed;
+  --card: #303134; /* surface-dark-elevated: tui-prompt-row */
+  --card-foreground: #e8eaed;
+  --popover: #303134;
+  --popover-foreground: #e8eaed;
+  --primary: #8ab4f8;
+  --primary-foreground: #202124;
+  --primary-hover: #aecbfa;
+  --primary-active: #669df6;
+  --secondary: #303134;
+  --secondary-foreground: #e8eaed;
+  --muted: #303134;
+  --muted-foreground: #9aa0a6;
+  --accent: #303134;
+  --accent-foreground: #e8eaed;
+  --destructive: #f28b82;
+  --border: #5f6368;
+  --input: #5f6368;
+  --ring: #8ab4f8;
+  --body: #e8eaed;
+  --charcoal: #e8eaed;
+  --stone: #9aa0a6;
+  --ash: #9aa0a6;
+  --surface-card: #303134;
+  --hairline-strong: #9aa0a6;
+  --warning: #fdd663;
+  --success: #81c995;
+}
+
+@utility type-display-xl {
+  font-size: clamp(28px, 2.5vw + 18px, 38px);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+@utility type-heading-md {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+@utility type-body-md {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+@utility type-body-strong {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+@utility type-body-tight {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+}
+@utility type-link-md {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+}
+@utility type-button-md {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2;
+  letter-spacing: 0;
+}
+@utility type-caption-md {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 2;
+  letter-spacing: 0;
+}
+@utility type-code-md {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+  }
+  body {
+    @apply bg-background text-body type-body-md;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+/* Block-pixel ASCII wordmark. Sized so the nav mark is ~178x32px. */
+@utility type-wordmark {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+}
+@utility type-wordmark-lg {
+  font-family: var(--font-mono);
+  font-size: clamp(8px, 2.2vw, 16px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+/* Stat-band figures: display-xl sizing without counting as the page's one display headline. */
+@utility type-display-stat {
+  font-size: clamp(28px, 2.5vw + 18px, 38px);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0;
 }
