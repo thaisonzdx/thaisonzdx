@@ -42,6 +42,13 @@
       "sourceType": "github",
       "skillPath": "skills/firestore-rules-creation/SKILL.md",
       "computedHash": "a0230fba169c539608f2f51d14590c4420fbe4746ed6f71fdd115812a07ee4d5"
+    },
+    "shadcn": {
+      "source": "shadcn/ui",
+      "commit": "bfa64ff4d1cb7317d2403ecb176df6826d4caffc",
+      "sourceType": "github",
+      "skillPath": "skills/shadcn/SKILL.md",
+      "computedHash": "388962d16c7a4f13aaeee0d8f128e50a87df8553d42ef7988c39c0e1c74a40e8"
     }
   }
 }
