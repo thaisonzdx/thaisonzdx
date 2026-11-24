@@ -1,6 +1,6 @@
 import type { ComponentProps, ComponentType } from "react";
 import type { Metadata } from "next";
-import { Comfortaa } from "next/font/google";
+import { Roboto_Mono } from "next/font/google";
 import { HeartIcon } from "lucide-react";
 
 import {
@@ -15,8 +15,8 @@ import { profile, socials } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
-const comfortaa = Comfortaa({
-  variable: "--font-comfortaa",
+const robotoMono = Roboto_Mono({
+  variable: "--font-roboto-mono",
   subsets: ["latin", "vietnamese"],
 });
 
@@ -30,7 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       id="top"
-      className={cn("h-full antialiased", comfortaa.variable)}
+      className={cn("h-full antialiased", robotoMono.variable)}
     >
       <body className="flex min-h-full flex-col">
         <div className="mx-auto flex w-full max-w-frame flex-1 flex-col border-border lg:border lg:border-t-0">
