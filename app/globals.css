@@ -70,6 +70,12 @@
   --shadow-2xs: 0 0 #0000;
   --shadow-xs: 0 0 #0000;
   --shadow-sm: 0 0 #0000;
+  --animate-heartbeat: heartbeat 1s ease infinite;
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(0.5); }
+    50% { transform: scale(1); }
+  }
+
   --shadow-md: 0 0 #0000;
   --shadow-lg: 0 0 #0000;
   --shadow-xl: 0 0 #0000;
