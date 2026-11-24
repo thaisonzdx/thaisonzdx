@@ -2,7 +2,7 @@
 version: 1.0.0
 name: thaisonzdx-design
 description: |
-  A terminal-inspired marketing system set in Comfortaa — every word of chrome, from the hero headline down to the footer fine print, uses the same rounded geometric sans face, with a monospace stack reserved for code and TUI surfaces. The page itself reads like a manpage or a static-site README: white canvas (`#ffffff`), Google Grey 900 ink (`#202124`), Google Blue (`#1a73e8`) primary actions, 4px-radius rectangles for the few interactive elements, and bracketed `[+]`/`[-]` ASCII markers used as bullets. The brand's only "visual moment" is a single dark hero card that mocks up the OpenCode TUI itself — black background, monospaced terminal output, ASCII pipe characters, and a wordmark rendered as block-pixel ASCII. Every section sits as a hairline-bordered text block on the white canvas with no shadows, no gradients, no decorative imagery, and no second display face anywhere in the system.
+  A terminal-inspired marketing system set in Roboto Mono — every word of chrome, from the hero headline down to the footer fine print, uses the same monospaced face, which also carries code and TUI surfaces. The page itself reads like a manpage or a static-site README: white canvas (`#ffffff`), Google Grey 900 ink (`#202124`), Google Blue (`#1a73e8`) primary actions, 4px-radius rectangles for the few interactive elements, and bracketed `[+]`/`[-]` ASCII markers used as bullets. The brand's only "visual moment" is a single dark hero card that mocks up the OpenCode TUI itself — black background, monospaced terminal output, ASCII pipe characters, and a wordmark rendered as block-pixel ASCII. Every section sits as a hairline-bordered text block on the white canvas with no shadows, no gradients, no decorative imagery, and no second display face anywhere in the system.
 
 colors:
   primary: "#1a73e8"
@@ -38,49 +38,49 @@ colors:
 
 typography:
   display-xl:
-    fontFamily: Comfortaa
+    fontFamily: Roboto Mono
     fontSize: 38px
     fontWeight: 700
     lineHeight: 1.5
     letterSpacing: 0
   heading-md:
-    fontFamily: Comfortaa
+    fontFamily: Roboto Mono
     fontSize: 16px
     fontWeight: 700
     lineHeight: 1.5
     letterSpacing: 0
   body-md:
-    fontFamily: Comfortaa
+    fontFamily: Roboto Mono
     fontSize: 16px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0
   body-strong:
-    fontFamily: Comfortaa
+    fontFamily: Roboto Mono
     fontSize: 16px
     fontWeight: 500
     lineHeight: 1.5
     letterSpacing: 0
   body-tight:
-    fontFamily: Comfortaa
+    fontFamily: Roboto Mono
     fontSize: 16px
     fontWeight: 500
     lineHeight: 1
     letterSpacing: 0
   link-md:
-    fontFamily: Comfortaa
+    fontFamily: Roboto Mono
     fontSize: 16px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0
   button-md:
-    fontFamily: Comfortaa
+    fontFamily: Roboto Mono
     fontSize: 16px
     fontWeight: 500
     lineHeight: 2
     letterSpacing: 0
   caption-md:
-    fontFamily: Comfortaa
+    fontFamily: Roboto Mono
     fontSize: 14px
     fontWeight: 400
     lineHeight: 2
@@ -286,14 +286,14 @@ components:
 
 ## Overview
 
-The site is set in Comfortaa — every word of chrome, from the 38px hero headline down to the 14px footer fine print, sits in the same rounded geometric sans face. The terminal flavor comes from layout rather than type: the page reads like a manpage or a static-site README, complete with bracketed `[+]` / `[-]` / `[x]` ASCII markers used in place of icons or bullets, and a wordmark rendered as block-pixel ASCII art at the top of the nav. There is no second display face, no italics, no decorative ornament — monospace appears only inside code snippets and the TUI mockup.
+The site is set in Roboto Mono — every word of chrome, from the 38px hero headline down to the 14px footer fine print, sits in the same monospaced face. The terminal flavor comes from both the type and the layout: the page reads like a manpage or a static-site README, complete with bracketed `[+]` / `[-]` / `[x]` ASCII markers used in place of icons or bullets, and a wordmark rendered as block-pixel ASCII art at the top of the nav. There is no second display face, no italics, no decorative ornament — code snippets and the TUI mockup use the same face at `{typography.code-md}`.
 
 The chrome follows Google's product palette: white canvas (`{colors.canvas}` — `#ffffff`), Google Grey 900 ink (`{colors.ink}` — `#202124`), and the Google Grey ladder (`#3c4043` → `#5f6368` → `#80868b` → `#9aa0a6`) for body, metadata, and disabled text. Cards don't exist as raised surfaces. The whole page lives inside one 1080px `{component.page-frame}` outlined by 1px `{colors.hairline}` side rules, and every section is a full-width band inside that frame, separated from the next by a single hairline and padded from within (48–64px vertical, 24–80px horizontal). The single "visual" moment in the entire system is a full-bleed dark hero card (`{colors.surface-dark}` — true near-black) that mocks up the OpenCode TUI itself: a terminal frame with `tab` / `ctrl-p` keybinding hints, a "Build" command line, and the OpenCode wordmark rendered as a pixel-block ASCII title.
 
 The semantic palette follows Google's brand ramp — `{colors.brand}` (Google Blue `#1a73e8`), `{colors.danger}` (Google Red `#d93025`), `{colors.warning}` (Google Yellow `#f9ab00`), `{colors.success}` (Google Green `#188038`) plus their hover/active deepenings. Google Blue is the primary action color (CTAs, focus rings, input focus); the other hues carry their conventional status meaning. Charts use the Google logo colors (`#4285f4`, `#ea4335`, `#fbbc04`, `#34a853`).
 
 **Key Characteristics:**
-- Comfortaa across every chrome text role; monospace (`{typography.code-md}`) only for code and TUI surfaces
+- Roboto Mono across every text role; `{typography.code-md}` only for code and TUI surfaces
 - White `{colors.canvas}` (#ffffff) as the only body background — no surface alternation across sections
 - Single dark surface (`{colors.surface-dark}` — #202124) reserved exclusively for the hero TUI mockup
 - 4px radius (`{rounded.sm}`) on every interactive element; sections themselves are sharp rectangles bordered in 1px hairline
@@ -339,11 +339,13 @@ Google's status ramp. Dark mode uses the tonal pastels (`#8ab4f8`, `#f28b82`, `#
 ## Typography
 
 ### Font Family
-**Comfortaa** is the single face used across every chrome text role. It is loaded via `next/font/google` (`Comfortaa` in [app/layout.tsx](app/layout.tsx), Latin + Vietnamese subsets) as a variable font and exposed as the `--font-sans` CSS variable / Tailwind `font-sans` utility. It supports weights 300–700; the system uses 400 (regular), 500 (medium), and 700 (bold) and falls back through the system sans stack — ui-sans-serif → system-ui → -apple-system → Segoe UI → Roboto.
+**Roboto Mono** is the single face used across every text role. It is loaded via `next/font/google` (`Roboto_Mono` in [app/layout.tsx](app/layout.tsx), Latin + Vietnamese subsets) as a variable font and exposed as the `--font-roboto-mono` CSS variable, bound to both `--font-sans` (Tailwind `font-sans`) and `--font-mono` (Tailwind `font-mono`). It supports weights 100–700; the system uses 400 (regular), 500 (medium), and 700 (bold) and falls back through the system monospace stack — ui-monospace → SFMono-Regular → Menlo → Monaco → Consolas → Liberation Mono → Courier New.
 
-**Monospace** (`{typography.code-md}`, Tailwind `font-mono`) is reserved for code: the install snippet, the hero TUI mockup, and its prompt row. It resolves through ui-monospace → SFMono-Regular → Menlo → Monaco → Consolas → Liberation Mono → Courier New.
+**Code** (`{typography.code-md}`, Tailwind `font-mono`) is reserved for the install snippet, the hero TUI mockup, and its prompt row. It resolves to the same Roboto Mono face, at 15px.
 
-The single-sans decision is the brand. There is no display face and no italic alternative — even the legal copyright row uses Comfortaa at 14px.
+**ASCII wordmark** (`type-wordmark`, `type-wordmark-lg`) is the one exception: Roboto Mono has no block-element glyphs (`█`, `▀`), so the wordmark uses `--font-ascii` (Menlo → Monaco → Consolas → DejaVu Sans Mono → Liberation Mono → Courier New), faces whose block glyphs fill exactly one cell, which keeps the pixel grid aligned. `ui-monospace` / SF Mono is deliberately excluded: it draws `█` and `▀` wider than its advance, so adjacent letters overlap.
+
+The single-face decision is the brand. There is no display face and no italic alternative — even the legal copyright row uses Roboto Mono at 14px.
 
 ### Hierarchy
 
@@ -363,10 +365,10 @@ The single-sans decision is the brand. There is no display face and no italic al
 The hierarchy is built almost entirely from size and weight contrast on a single face. The display headline (38px / 700) and the heading-md label (16px / 700) share a weight; the difference is just size. Body and link share size, weight, and line-height — only context distinguishes them. Buttons get a deliberately tall line-height (2.0) so labels feel calmly spaced inside the 4px-radius rectangle.
 
 ### Note on Font Substitutes
-Comfortaa is served through `next/font/google`, so no self-hosting is required. If it must be swapped, close open-source substitutes are:
-- **Quicksand** — similarly rounded geometric construction; pair at weights 400 / 500 / 700.
-- **Nunito** — rounded terminals with a slightly more humanist feel.
-- **Varela Round** — single-weight rounded sans for minimal fallbacks.
+Roboto Mono is served through `next/font/google`, so no self-hosting is required. If it must be swapped, close open-source substitutes are:
+- **JetBrains Mono** — similar proportions with a slightly taller x-height; pair at weights 400 / 500 / 700.
+- **IBM Plex Mono** — a touch more character, full weight range.
+- **Source Code Pro** — neutral, wide weight range for minimal fallbacks.
 
 When substituting, line-height behavior is preserved by keeping `lineHeight: 1.5` for body and `lineHeight: 2` for buttons — adjusting weight is rarely needed.
 
@@ -517,11 +519,11 @@ There is no photography. Visual elements are limited to:
 
 **`primary-nav`**
 - Sticky at the top of the page frame. Background `{colors.canvas}`, height 80px, rounded `{rounded.none}`, with a 1px `{colors.hairline}` bottom rule and the same 24px → 80px horizontal gutter as the section bands.
-- Links are plain text in `{typography.body-strong}` `{colors.mute}`, turning `{colors.ink}` on hover or when active (`primary-nav-active`), 16px apart. The CTA sits 32px after the link cluster.
-- Layout (desktop): block-pixel ASCII OpenCode wordmark at left (~120×24px), nav links cluster center-right ("GitHub [150K] · Docs · Zen · Go · Enterprise"), `{component.button-primary}` "Download" CTA at the far right with a small download glyph.
+- Links are 16px solid brand icons (GitHub, LinkedIn, Facebook, Instagram, X) in `{colors.mute}`, turning `{colors.ink}` on hover or press, 16px apart, each a 44px-tall tap target labelled with the network name. The CTA sits 32px after the icon cluster.
+- Layout (desktop): block-pixel ASCII wordmark at left, social icon cluster at right, `{component.button-primary}` "Contact" CTA at the far right.
 
 **Top Nav (Mobile)**
-- ASCII wordmark stays at left, nav links collapse into a hamburger drawer at the right. The Download CTA remains visible at every breakpoint.
+- ASCII wordmark stays at left; the social icons are hidden below `md` (the footer still lists them). The Contact CTA remains visible at every breakpoint.
 
 ### Footer
 
@@ -540,7 +542,7 @@ There is no photography. Visual elements are limited to:
 ## Do's and Don'ts
 
 ### Do
-- Render every chrome text role in Comfortaa (`font-sans`). Use `{typography.code-md}` only for code and TUI surfaces.
+- Render every chrome text role in Roboto Mono (`font-sans`). Use `{typography.code-md}` only for code and TUI surfaces.
 - Keep `{colors.canvas}` (`#ffffff`) as the only body background. Don't introduce gray section bands.
 - Use ASCII bracket markers (`[+]`, `[-]`, `[x]`, `+`, `−`) as bullets, toggles, and section glyphs. They are the brand's only iconography.
 - Anchor the dark `{component.hero-tui-mockup}` exactly once per landing page as the hero centerpiece. Never use the dark surface for body content.
@@ -549,7 +551,7 @@ There is no photography. Visual elements are limited to:
 - Put every section inside the 1080px `{component.page-frame}` as a band: 1px `{colors.hairline}` top rule, padding inside (48/24 → 64/80), and the same gutter as the nav.
 
 ### Don't
-- Don't introduce a second sans, a display face, or an italic style. Comfortaa carries everything outside code.
+- Don't introduce a second face, a display face, or an italic style. Roboto Mono carries everything.
 - Don't add drop shadows, gradients, or atmospheric backgrounds. The system is flat-on-white.
 - Don't replace the ASCII bracket markers with SVG icons. The brackets are the icons.
 - Don't use the status colors (`{colors.warning}`, `{colors.danger}`, `{colors.success}`) on marketing CTAs. CTAs are always `{colors.brand}`.
@@ -594,7 +596,7 @@ There are no raster images in the system aside from the favicon and OG share ima
 4. Add new variants as separate component entries (`-active`, `-disabled`) — do not bury them inside prose.
 5. Default body to `{typography.body-md}`; reach for `{typography.body-strong}` for emphasis; reserve `{typography.display-xl}` strictly for the page-top hero headline.
 6. Keep `{colors.surface-dark}` scarce — at most one full-bleed dark mockup per page. The dark surface is a narrative device, not a chrome treatment.
-7. When introducing a new component, ask whether it can be expressed with the existing ASCII-bracket + 4px-radius + Comfortaa vocabulary before adding new tokens. The system's strength is that it almost never needs new ones.
+7. When introducing a new component, ask whether it can be expressed with the existing ASCII-bracket + 4px-radius + Roboto Mono vocabulary before adding new tokens. The system's strength is that it almost never needs new ones.
 
 ## Known Gaps
 

@@ -17,10 +17,10 @@ Load these first. Don't repeat their content here:
 
 | Piece | Location | Rule |
 | --- | --- | --- |
-| Section | `components/sections/<kebab-name>.tsx` | Exports `<Pascal>Section`. Server component, no props. |
-| Interactive island | `components/sections/<kebab-name>-<part>.tsx` | `"use client"` only here, as small as possible. |
-| Content | `lib/content/<kebab-name>.ts` | Typed `const` data. Copy lives here, not in JSX. |
-| Primitives | `components/section.tsx` | `Section`, `SectionLabel`, `ListRows`, `ListRow`, `StatBand`, `TuiMockup` |
+| Section | `app/page.tsx` | Local (non-exported) `<Pascal>Section` function. Server component, no props. |
+| Interactive island | `components/ui/<kebab-name>.tsx` | `"use client"` only here, as small as possible. |
+| Content | `lib/portfolio.ts` | One typed `const` per section. Copy lives here, not in JSX. |
+| Primitives | `components/ui/section.tsx` | `Section`, `SectionLabel`, `ListRows`, `ListRow`, `StatBand`, `TuiMockup` |
 | shadcn UI | `components/ui/*` | Installed by CLI, restyled once in `cva` |
 | Composition | `app/page.tsx` (bands), `app/layout.tsx` (page frame, nav, footer, legal) | Order = reading order |
 
@@ -42,7 +42,7 @@ If a request needs something DESIGN.md forbids (photo grid, gradient banner, car
 
 ### 2. Foundation check
 
-Run Step 0 of `design`. Apply [foundation.md](../design/references/foundation.md) if the tokens, Comfortaa, restyled Button or `components/section.tsx` are missing.
+Run Step 0 of `design`. Apply [foundation.md](../design/references/foundation.md) if the tokens, Roboto Mono, restyled Button or `components/ui/section.tsx` are missing.
 
 ### 3. Get the components
 
@@ -60,7 +60,7 @@ After every `add`, apply "Restyle on install" from foundation.md to the new file
 Content file:
 
 ```ts
-// lib/content/projects.ts
+// lib/portfolio.ts
 export type Project = {
   name: string
   summary: string
@@ -74,14 +74,14 @@ export const projects: Project[] = [
 ]
 ```
 
-Section file:
+Section function, added to `app/page.tsx`:
 
 ```tsx
-// components/sections/projects.tsx
-import { ListRow, ListRows, Section } from "@/components/section"
-import { projects } from "@/lib/content/projects"
+// app/page.tsx
+import { ListRow, ListRows, Section } from "@/components/ui/section"
+import { projects } from "@/lib/portfolio"
 
-export function ProjectsSection() {
+function ProjectsSection() {
   return (
     <Section id="projects" label="Projects">
       <ListRows>
@@ -108,7 +108,7 @@ export function ProjectsSection() {
 }
 ```
 
-Then add `<ProjectsSection />` to `app/page.tsx` and, if it should be reachable, a `#projects` link in the nav content.
+Then render `<ProjectsSection />` inside `Home`'s `main` and, if it should be reachable, a `#projects` link in the nav content.
 
 Rules while writing:
 
@@ -121,14 +121,14 @@ Rules while writing:
 ### 5. Verify
 
 ```bash
-bash .agents/skills/design/scripts/audit.sh components/sections/<name>.tsx components/section.tsx app
+bash .agents/skills/design/scripts/audit.sh app components/ui
 pnpm lint
 pnpm build
 ```
 
 Then look at it. Start `pnpm dev` and check the page at 375, 768 and 1280px wide (browser tools if available, otherwise ask the user):
 
-- [ ] Comfortaa everywhere except code, markers and the TUI
+- [ ] Roboto Mono everywhere
 - [ ] Each section is a band: hairline above it, bold 16px label, no gap between bands
 - [ ] Band gutter lines up with the nav wordmark (24px → 80px) and padding matches the others (48 → 64px)
 - [ ] At 1024px+ the 1080px frame shows its side rules
@@ -147,7 +147,7 @@ Starting points for common portfolio sections. Adapt, but stay inside the vocabu
 
 | Section | DESIGN.md recipes | Build |
 | --- | --- | --- |
-| Nav (`header.tsx` + `menu.tsx`, in layout) | `primary-nav`, ASCII wordmark, `button-primary` | Sticky `header.border-b` inside the frame, `nav.h-20.px-6.lg:px-20.justify-between` → wordmark `<pre>` left; right cluster: plain mute text links (`gap-4`), then one primary CTA (`gap-8`). Below `md`: `Sheet` drawer with the same links. CTA stays visible. |
+| Nav (`header.tsx`, in layout) | `primary-nav`, ASCII wordmark, `button-primary` | Sticky `header.border-b` inside the frame, `nav.h-20.px-6.lg:px-20.justify-between` → wordmark `<pre>` left; right cluster: mute social icon links from `profile.socials` (`gap-4`, hidden below `md`), then one primary CTA (`gap-8`). CTA stays visible. |
 | Announcement | `announcement-strip` | Optional, directly under the nav: one `bg-muted` caption link ending in `→`. At most one. |
 | Hero | `hero-band`, `display-xl`, `badge-news`, `button-primary` + `button-secondary`, `hero-tui-mockup`, `tui-prompt-row` | `<Section variant="hero">`: badge, `h1.type-display-xl`, one-line intro, two CTAs. Then a full-bleed `TuiMockup` band with ASCII wordmark, a prompt row (`$ whoami` → role, location, stack) and a key-hint row in `text-ash`. The page's only dark surface. |
 | About | `badge-section-label`, `body-md`, `list-row` | Short prose in `text-body` (`max-w-prose`), then `[+]` rows for focus areas. |

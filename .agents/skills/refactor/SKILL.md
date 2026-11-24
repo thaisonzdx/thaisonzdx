@@ -47,7 +47,7 @@ Then check by hand what the script can't see, against the `design` hard rules:
 - [ ] `className` overriding a shadcn component's color, radius or type → move into the primitive's `cva` or delete
 - [ ] Gray or tinted section bands, boxed cards, padding above 16px inside blocks
 - [ ] Icons used as bullets or toggles → ASCII markers
-- [ ] Copy hard-coded in JSX that belongs in `lib/content/`
+- [ ] Copy hard-coded in JSX that belongs in `lib/portfolio.ts`
 - [ ] `"use client"` on a whole section when only a small part is interactive
 - [ ] Section not built on `<Section>` / `SectionLabel` / `ListRow`, or adds its own outer margins, max width, gutter or gaps between bands (the page frame and `<Section>` own those)
 - [ ] Wrong heading levels, `div` soup instead of `ul/li`, `figure`, `nav`
@@ -63,11 +63,11 @@ Run Step 0 of `design`. If the tokens or primitives are missing, apply [foundati
 
 Each step should leave the page working. Run `pnpm lint` between steps when they are large.
 
-1. **Structure**: move the file to `components/sections/<kebab-name>.tsx`, export `<Pascal>Section`, and wrap it in `<Section id=... label=...>`. Keep the existing `id`.
-2. **Content**: extract copy and data to `lib/content/<kebab-name>.ts` with a type. Strings stay byte-identical.
+1. **Structure**: make it a local `<Pascal>Section` function in `app/page.tsx` (nav/footer live in `app/layout.tsx`), and wrap it in `<Section id=... label=...>`. Keep the existing `id`.
+2. **Content**: extract copy and data into `lib/portfolio.ts` as a typed `const`. Strings stay byte-identical.
 3. **Components**: replace custom markup with shadcn components (`pnpm dlx shadcn@latest add ...` + "Restyle on install"). Rows become `ListRow`, disclosures become `Accordion`, option sets become `Tabs`/`ToggleGroup`, forms become `FieldGroup`/`Field`.
 4. **Styling**: swap every raw value for the token classes, `type-*` utilities and radius rules. Delete overrides instead of translating them. If a shadcn component looks wrong in every section, fix its `cva` once.
-5. **Client boundary**: push `"use client"` down into a `<name>-<part>.tsx` island that receives plain serializable props.
+5. **Client boundary**: push `"use client"` down into a `components/ui/<name>.tsx` island that receives plain serializable props.
 6. **Cleanup**: remove dead code, unused imports, orphaned assets and unused dependencies the section owned.
 
 Don't change copy, reorder content, add features or rename anchors as part of a refactor. Propose them separately.
@@ -75,7 +75,7 @@ Don't change copy, reorder content, add features or rename anchors as part of a 
 ### 6. Verify against the baseline
 
 ```bash
-bash .agents/skills/design/scripts/audit.sh <section files> components/section.tsx
+bash .agents/skills/design/scripts/audit.sh <section files> components/ui/section.tsx
 pnpm lint
 pnpm build
 ```
