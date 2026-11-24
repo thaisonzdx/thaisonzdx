@@ -69,7 +69,7 @@ check error text-size "Use type-* utilities, not raw text sizes." \
   "${B}text-(xs|sm|base|lg|xl|[2-9]xl)${E}|${B}text-\[[0-9]"
 check error tracking "Letter spacing is 0 for every token." \
   "${B}tracking-(tighter|tight|wide|wider|widest|\[)"
-check error italic-serif "No italic and no second face. Comfortaa (font-sans) or font-mono only." \
+check error italic-serif "No italic and no second face. Roboto Mono (font-sans) or font-mono only." \
   "${B}(italic|font-serif)${E}|font-style: *['\"]?italic"
 check error radius "Radius is rounded-sm (interactive) or rounded-none (containers)." \
   "${B}rounded(-(t|r|b|l|tl|tr|br|bl|s|e|ss|se|es|ee))?(-(md|lg|xl|2xl|3xl|4xl)|-\[[^]]+\])?${E}" \

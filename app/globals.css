@@ -49,9 +49,12 @@
   --color-warning: var(--warning);
   --color-success: var(--success);
 
-  --font-sans: var(--font-comfortaa), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans: var(--font-roboto-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono: var(--font-roboto-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-heading: var(--font-sans);
+  /* Roboto Mono has no block-element glyphs (█ ▀) and SF Mono draws them wider than a cell,
+     so the ASCII wordmark uses mono faces whose block glyphs fill exactly one cell. */
+  --font-ascii: Menlo, Monaco, Consolas, "DejaVu Sans Mono", "Liberation Mono", "Courier New", monospace;
 
   /* Two-value radius system: 4px interactive, 0px containers. */
   --radius-sm: 4px;
@@ -67,15 +70,15 @@
   /* Page frame: max-w-frame. */
   --container-frame: 1080px;
 
-  --shadow-2xs: 0 0 #0000;
-  --shadow-xs: 0 0 #0000;
-  --shadow-sm: 0 0 #0000;
   --animate-heartbeat: heartbeat 1s ease infinite;
   @keyframes heartbeat {
     0%, 100% { transform: scale(0.5); }
     50% { transform: scale(1); }
   }
 
+  --shadow-2xs: 0 0 #0000;
+  --shadow-xs: 0 0 #0000;
+  --shadow-sm: 0 0 #0000;
   --shadow-md: 0 0 #0000;
   --shadow-lg: 0 0 #0000;
   --shadow-xl: 0 0 #0000;
@@ -235,14 +238,14 @@
 
 /* Block-pixel ASCII wordmark. Sized so the nav mark is ~178x32px. */
 @utility type-wordmark {
-  font-family: var(--font-mono);
+  font-family: --theme(--font-ascii);
   font-size: 8px;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0;
 }
 @utility type-wordmark-lg {
-  font-family: var(--font-mono);
+  font-family: --theme(--font-ascii);
   font-size: clamp(8px, 2.2vw, 16px);
   font-weight: 400;
   line-height: 1;

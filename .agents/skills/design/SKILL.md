@@ -1,6 +1,6 @@
 ---
 name: design
-description: 'Translates this portfolio''s DESIGN.md (terminal-inspired, Comfortaa, Google palette, ASCII bracket markers, 4px/0px radius, flat-on-white) into concrete Tailwind classes, shadcn components and code conventions. Use when styling anything in this repo, checking UI against DESIGN.md, setting up or fixing the theme tokens in app/globals.css, restyling a shadcn primitive, or auditing a file for design violations. Loaded by develop and refactor.'
+description: 'Translates this portfolio''s DESIGN.md (terminal-inspired, Roboto Mono, Google palette, ASCII bracket markers, 4px/0px radius, flat-on-white) into concrete Tailwind classes, shadcn components and code conventions. Use when styling anything in this repo, checking UI against DESIGN.md, setting up or fixing the theme tokens in app/globals.css, restyling a shadcn primitive, or auditing a file for design violations. Loaded by develop and refactor.'
 ---
 
 # Portfolio Design
@@ -17,7 +17,7 @@ Pair with the `shadcn` skill (`.agents/skills/shadcn`) for CLI usage and compone
 | Package runner | `pnpm` → `pnpm dlx shadcn@latest <cmd>` |
 | shadcn style | `base-sera` on `@base-ui/react`. Use the `render` prop, never `asChild`. |
 | Theme file | `app/globals.css` (Tailwind v4, `@theme inline`, no tailwind.config) |
-| Fonts | `app/layout.tsx` via `next/font/google` |
+| Fonts | `app/layout.tsx` via `next/font/google` (Roboto Mono → `--font-sans` and `--font-mono`) |
 | `cn` | `@/lib/utils` |
 | UI primitives | `components/ui/*` (shadcn-owned source, restyle via `cva`) |
 | Sections | Local `<Pascal>Section` functions in `app/page.tsx`; nav, footer and legal in `app/layout.tsx` |
@@ -30,7 +30,7 @@ The theme must carry DESIGN.md tokens before sections can use them. Check:
 
 ```bash
 grep -c "#1a73e8" app/globals.css          # 0 → tokens not mapped
-grep -n "Comfortaa" app/layout.tsx         # must be the font bound to --font-sans
+grep -n "Roboto_Mono" app/layout.tsx       # must be the font bound to --font-sans
 grep -n "rounded-none" components/ui/*.tsx  # base-sera default; interactive elements need rounded-sm
 test -f components/ui/section.tsx            # section primitives exist
 ```
@@ -140,7 +140,7 @@ The brackets are the icons. They are text content, not decoration.
 
 Each one is a review blocker. [scripts/audit.sh](scripts/audit.sh) catches the mechanical ones.
 
-1. Comfortaa (`font-sans`) for all chrome. Monospace only for code, markers and the TUI. No serif, no italic, no second display face.
+1. Roboto Mono (`font-sans`, also bound to `font-mono`) for all text. `type-code-md` only for code and the TUI. No serif, no italic, no second display face.
 2. White canvas only. No gray or colored section bands. The one-line `announcement-strip` (`bg-muted`) is the only tinted strip.
 3. No shadows, gradients, blur, glow or background images.
 4. At most one dark surface per page: the hero TUI mockup. Never for body content.

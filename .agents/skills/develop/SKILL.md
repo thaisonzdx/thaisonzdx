@@ -42,7 +42,7 @@ If a request needs something DESIGN.md forbids (photo grid, gradient banner, car
 
 ### 2. Foundation check
 
-Run Step 0 of `design`. Apply [foundation.md](../design/references/foundation.md) if the tokens, Comfortaa, restyled Button or `components/section.tsx` are missing.
+Run Step 0 of `design`. Apply [foundation.md](../design/references/foundation.md) if the tokens, Roboto Mono, restyled Button or `components/ui/section.tsx` are missing.
 
 ### 3. Get the components
 
@@ -128,7 +128,7 @@ pnpm build
 
 Then look at it. Start `pnpm dev` and check the page at 375, 768 and 1280px wide (browser tools if available, otherwise ask the user):
 
-- [ ] Comfortaa everywhere except code, markers and the TUI
+- [ ] Roboto Mono everywhere
 - [ ] Each section is a band: hairline above it, bold 16px label, no gap between bands
 - [ ] Band gutter lines up with the nav wordmark (24px → 80px) and padding matches the others (48 → 64px)
 - [ ] At 1024px+ the 1080px frame shows its side rules
