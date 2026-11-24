@@ -271,9 +271,9 @@ grep -nE "rounded-none|uppercase|tracking-|text-xs|font-semibold|shadow|translat
 
 After restyling, grep again. The only `rounded-none` left should be on containers.
 
-## 4. Section primitives (`components/section.tsx`)
+## 4. Section primitives (`components/ui/section.tsx`)
 
-Create once. Every section uses these, so the band padding, gutter, hairline rules, ASCII rows and the TUI surface stay identical across the page. The current source of truth is `components/section.tsx`; the shape is:
+Create once. Every section uses these, so the band padding, gutter, hairline rules, ASCII rows and the TUI surface stay identical across the page. The current source of truth is `components/ui/section.tsx`; the shape is:
 
 | Export | Renders |
 | --- | --- |
