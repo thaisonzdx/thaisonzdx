@@ -105,7 +105,7 @@ fi
 
 others=()
 for f in "${files[@]}"; do
-  case "$f" in */components/section.tsx | components/section.tsx) ;; *) others+=("$f") ;; esac
+  case "$f" in */components/ui/section.tsx | components/ui/section.tsx) ;; *) others+=("$f") ;; esac
 done
 if [ ${#others[@]} -gt 0 ]; then
   dark=$(grep -hE "<TuiMockup|className=.*${B}dark([[:space:]\"'\`]|$)" "${others[@]}" 2>/dev/null | wc -l | tr -d ' ')

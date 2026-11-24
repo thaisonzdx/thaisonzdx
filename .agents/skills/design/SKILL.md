@@ -20,9 +20,9 @@ Pair with the `shadcn` skill (`.agents/skills/shadcn`) for CLI usage and compone
 | Fonts | `app/layout.tsx` via `next/font/google` |
 | `cn` | `@/lib/utils` |
 | UI primitives | `components/ui/*` (shadcn-owned source, restyle via `cva`) |
-| Sections | `components/sections/*` |
-| Section primitives | `components/section.tsx` |
-| Section content | `lib/content/*.ts` |
+| Sections | Local `<Pascal>Section` functions in `app/page.tsx`; nav, footer and legal in `app/layout.tsx` |
+| Section primitives | `components/ui/section.tsx` |
+| Section content | `lib/portfolio.ts` |
 
 ## Step 0: Foundation check (run before any UI work)
 
@@ -32,7 +32,7 @@ The theme must carry DESIGN.md tokens before sections can use them. Check:
 grep -c "#1a73e8" app/globals.css          # 0 → tokens not mapped
 grep -n "Comfortaa" app/layout.tsx         # must be the font bound to --font-sans
 grep -n "rounded-none" components/ui/*.tsx  # base-sera default; interactive elements need rounded-sm
-test -f components/section.tsx            # section primitives exist
+test -f components/ui/section.tsx            # section primitives exist
 ```
 
 If any check fails, apply [references/foundation.md](references/foundation.md) once, then continue. Tell the user you did it, because it changes every component.
@@ -98,22 +98,22 @@ Build from shadcn components first. Add missing ones with `pnpm dlx shadcn@lates
 | `button-tab` / `-active` | `Tabs` + `TabsList` + `TabsTrigger`, restyled: mute → ink text, 2px `ash` underline when active, `hairline-strong` bottom rule on the list. Use the `line` list variant if the installed `tabs.tsx` has one. |
 | `button-disabled` | `<Button disabled>` |
 | `badge-news` | `<Badge>` restyled to `surface-dark` / `on-dark`, `type-caption-md`, `rounded-sm px-2 py-0.5` |
-| `badge-section-label` | `<SectionLabel>` from `components/section.tsx` |
+| `badge-section-label` | `<SectionLabel>` from `components/ui/section.tsx` |
 | `text-input` / `textarea` | `Field` + `Input` / `Textarea` inside `FieldGroup` |
 | `install-snippet` | `InputGroup` with `InputGroupInput readOnly` + copy `InputGroupButton`, or `<pre className="bg-surface-card rounded-sm type-code-md px-4 py-3">` |
-| `hero-tui-mockup` | `<TuiMockup>` from `components/section.tsx` |
+| `hero-tui-mockup` | `<TuiMockup>` from `components/ui/section.tsx` |
 | `tui-prompt-row` | `div.bg-card.rounded-sm.px-3.py-2` inside the mockup |
 | `page-frame` | `app/layout.tsx`: `div.mx-auto.max-w-frame.border-border.lg:border.lg:border-t-0` wrapping nav, page and footer |
-| `section-band` / `hero-band` | `<Section id label>` / `<Section variant="hero">` from `components/section.tsx` |
-| `stat-band` | `<StatBand stats={...}>` from `components/section.tsx` (full-bleed, hairline-divided `dl`) |
-| `announcement-strip` | `components/announcement-strip.tsx`: one `a.border-b.bg-muted.px-6.py-2.5.type-caption-md.lg:px-20` ending in `→` |
-| `data-table` | `table` with `thead tr.border-b.border-hairline-strong`, `tbody.divide-y.divide-border`, cells `py-4 pr-6`; below `md` every element gets `max-md:block` and `thead` is `max-md:hidden` (see `components/sections/experience.tsx`) |
+| `section-band` / `hero-band` | `<Section id label>` / `<Section variant="hero">` from `components/ui/section.tsx` |
+| `stat-band` | `<StatBand stats={...}>` from `components/ui/section.tsx` (full-bleed, hairline-divided `dl`) |
+| `announcement-strip` | `AnnouncementStrip` in `app/page.tsx`: one `a.border-b.bg-muted.px-6.py-2.5.type-caption-md.lg:px-20` ending in `→` |
+| `data-table` | `table` with `thead tr.border-b.border-hairline-strong`, `tbody.divide-y.divide-border`, cells `py-4 pr-6`; below `md` every element gets `max-md:block` and `thead` is `max-md:hidden` (see `ExperienceSection` in `app/page.tsx`) |
 | split band | `<Section className="gap-12 lg:grid lg:grid-cols-[1fr_480px]" aria-labelledby=...>` with the `SectionLabel` inside the left column |
-| `list-row` | `<ListRow marker="[+]" label=...>` from `components/section.tsx`. Label and description stack below `md`, sit inline from `md`. |
+| `list-row` | `<ListRow marker="[+]" label=...>` from `components/ui/section.tsx`. Label and description stack below `md`, sit inline from `md`. |
 | `faq-row` | `Accordion`, chevron replaced by `+`/`−` text driven by `data-panel-open` on the trigger |
 | `testimonial-row` | `div.bg-muted.rounded-sm.px-5.py-4` + `Avatar` (always with `AvatarFallback`) |
 | `chart-tile` | `figure` + inline SVG + `figcaption.type-caption-md.text-muted-foreground` (`Fig N. ...`) |
-| `primary-nav` | sticky `header.border-b` inside the frame, `nav.h-20.px-6.lg:px-20`. Links are plain `a.type-body-strong.text-muted-foreground.hover:text-foreground` (`h-11`, `gap-4`), CTA `gap-8` after them. `Sheet` drawer below `md` (needs `SheetTitle`, `sr-only` is fine) |
+| `primary-nav` | sticky `header.border-b` inside the frame, `nav.h-20.px-6.lg:px-20`. Social icon links from `components/ui/social.tsx` (`a.h-11.text-muted-foreground.hover:text-foreground` with `aria-label`, icon `aria-hidden`, `gap-4`), `hidden md:flex`. CTA `gap-8` after them, visible at every width. No drawer. |
 | `footer-section` / `footer-legal` | Inside the frame: `footer.flex.flex-col.border-t.sm:flex-row` of `flex-1` link cells (`py-8`, `sm:border-l sm:first:border-l-0`). Outside the frame: `Legal`, `mt-16` centered `type-caption-md text-muted-foreground` |
 | `link-inline` | `<a className="type-link-md">` or `next/link` with the same class |
 | callouts | `Alert` |
@@ -156,7 +156,7 @@ Each one is a review blocker. [scripts/audit.sh](scripts/audit.sh) catches the m
 Run the audit on every file or folder you touched:
 
 ```bash
-bash .agents/skills/design/scripts/audit.sh components/sections app/page.tsx
+bash .agents/skills/design/scripts/audit.sh app components/ui
 ```
 
 It prints `file:line: [rule] code` and exits non-zero on violations. Fix them, or justify each remaining one to the user.
