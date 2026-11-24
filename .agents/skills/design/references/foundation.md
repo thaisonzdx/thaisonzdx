@@ -109,9 +109,11 @@ In `@theme inline`, replace the font and `--radius-*` lines and register the ext
   --color-warning: var(--warning);
   --color-success: var(--success);
 
-  --font-sans: var(--font-comfortaa), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans: var(--font-roboto-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono: var(--font-roboto-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-heading: var(--font-sans);
+  /* Roboto Mono has no block-element glyphs (█ ▀); the ASCII wordmark utilities use this instead. */
+  --font-ascii: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   /* Two-value radius system: 4px interactive, 0px containers. */
   --radius-sm: 4px;
@@ -220,24 +222,24 @@ Remove the standalone `body { font-family: var(--font-sans); }` rule and make th
 
 ## 2. Fonts (`app/layout.tsx`)
 
-Comfortaa is the only sans. Drop `Inter` and `Geist_Mono` (mono resolves to the system stack above).
+Roboto Mono is the only face, bound to both `--font-sans` and `--font-mono`. Drop `Inter` and `Geist_Mono`.
 
 ```tsx
-import { Comfortaa } from "next/font/google";
+import { Roboto_Mono } from "next/font/google";
 
-const comfortaa = Comfortaa({
-  variable: "--font-comfortaa",
+const robotoMono = Roboto_Mono({
+  variable: "--font-roboto-mono",
   subsets: ["latin", "vietnamese"],
 });
 
-// <html lang="en" className={cn("h-full antialiased", comfortaa.variable)}>
+// <html lang="en" className={cn("h-full antialiased", robotoMono.variable)}>
 ```
 
 Update `metadata` with the real title and description while you're there if they are still the create-next-app defaults.
 
 ## 3. Restyle on install
 
-`base-sera` ships sharp, uppercase, tracked controls. DESIGN.md wants 4px, sentence case, Comfortaa 16/500. Every time `shadcn add` installs or updates a primitive, fix its `cva` source once. Never patch at the call site.
+`base-sera` ships sharp, uppercase, tracked controls. DESIGN.md wants 4px, sentence case, Roboto Mono 16/500. Every time `shadcn add` installs or updates a primitive, fix its `cva` source once. Never patch at the call site.
 
 Find what needs changing:
 
@@ -334,4 +336,4 @@ pnpm lint && pnpm build
 bash .agents/skills/design/scripts/audit.sh components app
 ```
 
-Then open the page and check: white canvas, Comfortaa everywhere except code, blue primary button with 4px corners, hairline section labels, no shadows.
+Then open the page and check: white canvas, Roboto Mono everywhere, blue primary button with 4px corners, hairline section labels, no shadows.
