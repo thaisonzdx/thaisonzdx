@@ -30,10 +30,6 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
-!.env.example
-
 # vercel
 .vercel
 
@@ -41,5 +37,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# firebase app hosting (copy apphosting.example.yaml)
-# apphosting.yaml
+# env files (can opt-in for committing if needed)
+.env*
+!.env.example
+
+# firebase app hosting
+apphosting.yaml
+!apphosting.example.yaml
